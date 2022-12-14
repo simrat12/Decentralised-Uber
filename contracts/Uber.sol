@@ -54,8 +54,8 @@ contract Uber {
 
 
     function RegisterDriver(address _addy, string memory _city, string memory _name) public acceptedCity(_city) {
-        require(users[_addy].Name != bytes32("0x00"), "Already registered as a user!");
-        require(drivers[_addy].Name == bytes32("0x00"), "Already registered!");
+        require(users[_addy].Name == bytes32(0x0000000000000000000000000000000000000000000000000000000000000000), "Already registered as a user!");
+        require(drivers[_addy].Name == bytes32(0x0000000000000000000000000000000000000000000000000000000000000000), "Already registered!");
         bytes32 encodedCity = keccak256(abi.encode(_city));
         bytes32 encodedName = keccak256(abi.encode(_name));
         Driver memory driver = Driver(encodedCity, 0, encodedName);
@@ -63,8 +63,8 @@ contract Uber {
     }
 
     function RegisterUser(address _addy, string memory _name, string memory _city, bool _premium) public acceptedCity(_city) {
-        require(drivers[_addy].Name != bytes32("0x00"), "Already registered as a user!");
-        require(users[_addy].Name == bytes32("0x00"), "Already registered!");
+        require(drivers[_addy].Name == bytes32(0x0000000000000000000000000000000000000000000000000000000000000000), "Already registered as a user!");
+        require(users[_addy].Name == bytes32(0x0000000000000000000000000000000000000000000000000000000000000000), "Already registered!");
         bytes32 encodedName = keccak256(abi.encode(_name));
         bytes32 encodedCity = keccak256(abi.encode(_city));
         User memory user = User(encodedName, 0, encodedCity, _premium);
